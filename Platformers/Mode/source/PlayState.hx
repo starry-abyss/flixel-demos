@@ -251,7 +251,23 @@ class PlayState extends FlxState
 		// Check to see if the player scored any points this frame
 		var scoreChanged:Bool = oldScore != Reg.score;
 		
+#if debug
+		FlxG.debugger.drawDebug = true;
+#end
+		
 		#if !FLX_NO_KEYBOARD
+#if debug
+		if (FlxG.keys.justPressed.E)
+		{
+			//_tileMap.debugColorScheme.solid = Std.random(0xFFFFFF);
+			_tileMap.debugColorScheme = { solid: Std.random(0xFFFFFF), notSolid: Std.random(0xFFFFFF), highlighted: Std.random(0xFFFFFF) };
+		}
+		if (FlxG.keys.justPressed.W)
+		{
+			_player.debugColorScheme.solid = Std.random(0xFFFFFF);
+		}
+#end
+		
 		// Jammed message
 		if (FlxG.keys.justPressed.C && _player.flickering)
 		{
@@ -315,11 +331,11 @@ class PlayState extends FlxState
 			}
 			
 			// Fade out to victory screen stuffs
-			if (_spawners.countLiving() <= 0)
+			/*if (_spawners.countLiving() <= 0)
 			{
 				_fading = true;
 				FlxG.cameras.fade(0xffd8eba2, 3, false, onVictory);
-			}
+			}*/
 		}
 		
 		if (_score.size > 16)
@@ -415,6 +431,11 @@ class PlayState extends FlxState
 		_tileMap = new FlxTilemap();
 		_tileMap.useScaleHack = true;
 		_tileMap.loadMapFromArray(_map, MAP_WIDTH_IN_TILES, MAP_HEIGHT_IN_TILES, Reg.IMG_TILES, 8, 8);
+		
+		_tileMap.setTileProperties(1, FlxObject.NONE);
+		_tileMap.setTileProperties(2, FlxObject.NONE);
+		_tileMap.setTileProperties(3, FlxObject.UP);
+		_tileMap.setTileProperties(4, FlxObject.UP);
 		add(_tileMap);
 	}
 	
@@ -481,7 +502,7 @@ class PlayState extends FlxState
 			}
 		}
 		
-		if (Spawners)
+		/*if (Spawners)
 		{
 			// Finally actually add the spawner
 			var sp:Spawner = new Spawner(RX + sx * 8, RY + sy * 8, _bigGibs, _enemies, _enemyBullets, _littleGibs, _player);
@@ -495,7 +516,7 @@ class PlayState extends FlxState
 			var camera:FlxCamera = new FlxCamera(Math.floor(ratio * (10 + (_spawners.length - 1) * 32)), Math.floor(ratio * 10), 24, 24, ratio);
 			camera.follow(sp, NO_DEAD_ZONE);
 			FlxG.cameras.add(camera);
-		}
+		}*/
 	}
 	
 	private function fillTileMapRectWithRandomTiles(X:Int, Y:Int, Width:Int, Height:Int, StartTile:Int, EndTile:Int, MapArray:Array<Int>, MapWidth:Int):Array<Int>
