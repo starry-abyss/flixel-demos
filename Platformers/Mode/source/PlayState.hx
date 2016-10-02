@@ -260,8 +260,8 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.E)
 		{
 			//_tileMap.debugColorScheme.solid = Std.random(0xFFFFFF);
-			_tileMap.debugColorScheme = { solid: Std.random(0xFFFFFF), notSolid: Std.random(0xFFFFFF), highlighted: Std.random(0xFFFFFF) };
-			_player.debugColorScheme.solid = Std.random(0xFFFFFF);
+			_tileMap.setDebugColorScheme( { solid: Std.random(0xFFFFFF), notSolid: Std.random(0xFFFFFF), partial: Std.random(0xFFFFFF) } );
+			_player.setDebugColorScheme( { solid: Std.random(0xFFFFFF) } );
 		}
 #end
 		
