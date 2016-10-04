@@ -10,6 +10,7 @@ import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
+import flixel.util.FlxColor;
 import openfl.display.FPS;
 import openfl.Lib;
 
@@ -259,9 +260,12 @@ class PlayState extends FlxState
 #if debug
 		if (FlxG.keys.justPressed.E)
 		{
-			//_tileMap.debugColorScheme.solid = Std.random(0xFFFFFF);
-			_tileMap.setDebugColorScheme( { solid: Std.random(0xFFFFFF), notSolid: Std.random(0xFFFFFF), partial: Std.random(0xFFFFFF) } );
-			_player.setDebugColorScheme( { solid: Std.random(0xFFFFFF) } );
+			_tileMap.debugBoundingBoxColorSolid = Std.random(0xFFFFFF);
+			_tileMap.debugBoundingBoxColorNotSolid = Std.random(0xFFFFFF);
+			_tileMap.debugBoundingBoxColorPartial = Std.random(0xFFFFFF);
+			
+			_player.debugBoundingBoxColor = Std.random(0xFFFFFF);
+			_player.debugBoundingBoxColorSolid = FlxColor.CYAN;
 		}
 #end
 		
